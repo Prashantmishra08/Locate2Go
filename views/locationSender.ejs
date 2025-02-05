@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Location Page</title>
+    <link rel="stylesheet" href="/styles.css">
+
+    <style>
+        /* styles.css */
+
+body {
+  font-family: Arial, sans-serif;  margin: 20px;  }
+
+.heading {
+  text-align: center;  font-size: 2em;  color: blue;  }
+
+button {
+  background-color: #4CAF50;  color: white;  padding: 10px 20px;  border: none;  border-radius: 5px;  cursor: pointer;  }
+
+#location {
+  font-weight: bold;  margin-top: 20px;  }
+.a{
+    margin: auto;
+    text-align: center;
+    padding: 15%;
+}
+    </style>
+</head>
+<body>
+    <div class="a">
+        <h1>Driver Location Page</h1>
+        <button onclick="getLocation()">Get Location</button>
+        <p id="location"></p>
+
+    </div>
+    
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+
+      
+        const socket = io();
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(sendLocation);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function sendLocation(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            socket.emit('updateLocation', latitude, longitude);
+
+            document.getElementById('location').innerText = `Latitude: ${latitude}, Longitude: ${longitude}`;
+        }
+
+
+        setInterval(getLocation,2000);
+    
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Page</title>
+    <!-- Include Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Style for the map container -->
+    <style>
+        #map {
+            height: 600px;
+
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="map"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Function to initialize the map
+        function initMap() {
+            // Create map object centered at (0, 0)
+            var map = L.map('map').setView([20.5937, 78.9629], 5)
+
+            // Add tile layer for OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Initialize Socket.IO connection
+            var socket = io();
+
+            // Marker for driver's location
+            var driverMarker = L.marker([0, 0]).addTo(map);
+
+            socket.on('driverLocationUpdate', ({ latitude, longitude }) => {
+                // Update the marker position with the latest driver location
+                driverMarker.setLatLng([latitude, longitude]);
+
+                // Pan the map to the driver's location
+                map.panTo([latitude, longitude]);
+            });
+        }
+
+        // Call the initMap function when the page is loaded
+        window.onload = initMap;
+    </script>
+</body>
+</html>
+
+
+
+

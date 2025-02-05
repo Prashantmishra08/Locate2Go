@@ -1,0 +1,25 @@
+{
+  "name": "campusbus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.9",
+    "express": "^4.19.2",
+    "js": "^0.1.0",
+    "leaflet": "^1.9.4",
+    "mongoose": "^8.3.0",
+    "nodemon": "^3.0.3",
+    "socket.io": "^4.7.5"
+  }
+}
