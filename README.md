@@ -94,10 +94,5 @@ Want to improve this project? Feel free to submit issues or pull requests!
 
 ---
 
-## 📜 License
-
-This project is licensed under the **MIT License**.
-
----
 
 💡 _Developed with ❤️ using Node.js & MongoDB_
